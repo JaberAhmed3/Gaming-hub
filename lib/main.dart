@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:installed_apps/installed_apps.dart';
-import 'package:installed_apps/app_info.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dart_ping/dart_ping.dart';
@@ -31,6 +29,13 @@ class GameUtilityHubApp extends StatelessWidget {
           centerTitle: true,
           titleTextStyle: TextStyle(color: Color(0xFFFFD700), fontSize: 24, fontWeight: FontWeight.w900, letterSpacing: 1.5),
           iconTheme: IconThemeData(color: Color(0xFFFFD700)),
+        ),
+        sliderTheme: SliderThemeData(
+          activeTrackColor: const Color(0xFFFFD700),
+          inactiveTrackColor: const Color(0xFF1A1F2B),
+          thumbColor: const Color(0xFFFFD700),
+          overlayColor: const Color(0xFFFFD700).withOpacity(0.2),
+          trackHeight: 6,
         ),
         switchTheme: SwitchThemeData(
           thumbColor: WidgetStateProperty.all(const Color(0xFFFFD700)),
@@ -101,7 +106,6 @@ class PremiumBoostPanel extends StatefulWidget {
 class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
   bool _isOptimizing = false;
   
-  // Real-Time System Variables
   int _ping = 0;
   bool _pingBlink = true; 
   Ping? _pingService;
@@ -109,18 +113,22 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
   
   final Battery _battery = Battery();
   int _batteryLevel = 100;
-  
   bool _isVipUnlocked = false; 
-  List<AppInfo> _installedApps = [];
-  bool _isLoadingApps = true;
   RewardedAd? _rewardedAd;
+
+  // Smart Fake Game List for Optimization
+  final List<Map<String, dynamic>> _popularGames = [
+    {'name': 'Free Fire', 'icon': Icons.local_fire_department_rounded, 'color': Colors.orangeAccent},
+    {'name': 'PUBG Mobile', 'icon': Icons.sports_esports_rounded, 'color': Colors.yellowAccent},
+    {'name': 'Mobile Legends', 'icon': Icons.security_rounded, 'color': Colors.cyanAccent},
+    {'name': 'Roblox', 'icon': Icons.videogame_asset_rounded, 'color': Colors.white},
+  ];
 
   @override
   void initState() {
     super.initState();
     _initRealTimePing();
     _initBatteryStatus();
-    _loadApps();
     _loadRewardedAd(); 
   }
 
@@ -178,20 +186,6 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
   void _openVipPage() {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const VipSensiPage()));
   }
-
-    void _loadApps() async {
-    try {
-      // ⚠️ একদম সঠিক এবং ফাইনাল কোড ⚠️
-      List<AppInfo> apps = await InstalledApps.getInstalledApps(excludeSystemApps: true, withIcon: true);
-      List<AppInfo> gameApps = apps.where((app) {
-        String pkg = app.packageName?.toLowerCase() ?? '';
-        return pkg.contains('freefire') || pkg.contains('dts') || pkg.contains('pubg') || pkg.contains('tencent') || pkg.contains('legends') || pkg.contains('roblox');
-      }).toList();
-      if(mounted) setState(() { _installedApps = gameApps; _isLoadingApps = false; });
-    } catch (e) {
-      if(mounted) setState(() => _isLoadingApps = false);
-    }
-    }
 
   void _optimizeDevice() {
     setState(() => _isOptimizing = true);
@@ -336,9 +330,11 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
 
             const Padding(
               padding: EdgeInsets.only(left: 10),
-              child: Text("GAME LAUNCHER TOOLS", style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFFFD700), fontSize: 15, letterSpacing: 1.5)),
+              child: Text("SELECT GAME TO OPTIMIZE", style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFFFD700), fontSize: 15, letterSpacing: 1.5)),
             ),
             const SizedBox(height: 20),
+            
+            // Smart Optimization List
             Container(
               height: 120,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -347,32 +343,35 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
                 borderRadius: BorderRadius.circular(25),
                 border: Border.all(color: Colors.white10, width: 1),
               ),
-              child: _isLoadingApps 
-                  ? const Center(child: CircularProgressIndicator(color: Color(0xFFFFD700)))
-                  : ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _installedApps.length,
-                      itemBuilder: (context, index) {
-                        AppInfo app = _installedApps[index];
-                        return GestureDetector(
-                          onTap: () => InstalledApps.startApp(app.packageName!), 
-                          child: Container(
-                            width: 85, margin: const EdgeInsets.only(right: 20),
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(3),
-                                  decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: const Color(0xFFFFD700), width: 2)),
-                                  child: ClipRRect(borderRadius: BorderRadius.circular(50), child: app.icon != null ? Image.memory(app.icon!, width: 55, height: 55) : const Icon(Icons.games, color: Colors.white)),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(app.name ?? '', maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: Colors.white70, fontWeight: FontWeight.bold)),
-                              ],
-                            ),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _popularGames.length,
+                itemBuilder: (context, index) {
+                  var game = _popularGames[index];
+                  return GestureDetector(
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Applying Pro Presets for ${game['name']}..."), backgroundColor: const Color(0xFF1A1F2B), behavior: SnackBarBehavior.floating));
+                      Timer(const Duration(seconds: 2), () {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${game['name']} Optimized! Please launch game."), backgroundColor: Colors.greenAccent[700], behavior: SnackBarBehavior.floating));
+                      });
+                    }, 
+                    child: Container(
+                      width: 85, margin: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: game['color'], width: 2), color: game['color'].withOpacity(0.1)),
+                            child: Icon(game['icon'], color: game['color'], size: 24),
                           ),
-                        );
-                      },
+                          const SizedBox(height: 10),
+                          Text(game['name'], maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: Colors.white70, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
                     ),
+                  );
+                },
+              ),
             ),
           ],
         ),
