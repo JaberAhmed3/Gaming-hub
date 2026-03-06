@@ -179,10 +179,10 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const VipSensiPage()));
   }
 
-  void _loadApps() async {
+    void _loadApps() async {
     try {
-      // ⚠️ Reverted to stable true, true ⚠️
-      List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
+      // ⚠️ একদম সঠিক এবং ফাইনাল কোড ⚠️
+      List<AppInfo> apps = await InstalledApps.getInstalledApps(excludeSystemApps: true, withIcon: true);
       List<AppInfo> gameApps = apps.where((app) {
         String pkg = app.packageName?.toLowerCase() ?? '';
         return pkg.contains('freefire') || pkg.contains('dts') || pkg.contains('pubg') || pkg.contains('tencent') || pkg.contains('legends') || pkg.contains('roblox');
@@ -191,7 +191,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
     } catch (e) {
       if(mounted) setState(() => _isLoadingApps = false);
     }
-  }
+    }
 
   void _optimizeDevice() {
     setState(() => _isOptimizing = true);
