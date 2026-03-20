@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.mdzaberahmed.ffboostpanel"
-        minSdk = 21
+        minSdk = flutter.minSdkVersion
         targetSdk = 34
         versionCode = flutterVersionCode.toInt()
         versionName = flutterVersionName
