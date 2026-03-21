@@ -28,10 +28,14 @@ jobs:
       run: flutter pub get
 
     - name: Build APK
-      run: flutter build apk --release
+      run: flutter build apk --release \
+        --build-name=1.0.${{ github.run_number }} \
+        --build-number=${{ github.run_number }}
 
     - name: Build AAB (For Play Store)
-      run: flutter build appbundle --release
+      run: flutter build appbundle --release \
+        --build-name=1.0.${{ github.run_number }} \
+        --build-number=${{ github.run_number }}
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
