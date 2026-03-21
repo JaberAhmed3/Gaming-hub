@@ -44,5 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Android keystore (sensitive)
+# Android keystore (sensitive - DO NOT COMMIT)
 android/app/upload-keystore.jks
+upload-keystore.jks
+keystore.txt
+*.jks
+*.keystore
