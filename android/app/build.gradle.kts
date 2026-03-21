@@ -19,9 +19,26 @@ android {
         versionName = flutterVersionName
     }
 
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("android/debug.keystore")
+        }
+        create("release") {
+            storeFile = System.getenv("KEYSTORE_FILE")?.let { file(it) }
+                ?: file("upload-keystore.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+            keyAlias = System.getenv("KEY_ALIAS") ?: ""
+            keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+        }
+    }
+
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (System.getenv("KEYSTORE_PASSWORD") != null) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 
