@@ -9,12 +9,12 @@ val flutterVersionName = project.findProperty("flutter.versionName") as String? 
 
 android {
     namespace = "com.mdzaberahmed.ffboostpanel"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mdzaberahmed.ffboostpanel"
         minSdk = flutter.minSdkVersion
-        targetSdk = 34
+        targetSdk = 35
         versionCode = flutterVersionCode.toInt()
         versionName = flutterVersionName
     }
