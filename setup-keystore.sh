@@ -10,7 +10,7 @@ echo "Gaming Hub Keystore Setup"
 echo "=========================================="
 
 # Configuration
-KEYSTORE_FILE="upload-keystore.jks"
+KEYSTORE_FILE="android/upload-keystore.jks"
 ALIAS="upload"
 KEYSTORE_PASSWORD="gaming_hub_2024"
 KEY_PASSWORD="gaming_hub_2024"

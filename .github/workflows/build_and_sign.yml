@@ -1,4 +1,4 @@
-name: Build and Sign Play Store AAB
+name: Build Signed Play Store Artifacts
 
 on:
   workflow_dispatch: # এর মাধ্যমে আপনি যেকোনো সময় ম্যানুয়ালি বিল্ড শুরু করতে পারবেন
@@ -25,21 +25,38 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build Unsigned AAB
+      - name: Prepare Android signing
+        env:
+          ENCODED_KEYSTORE: ${{ secrets.ENCODED_KEYSTORE }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          test -n "$ENCODED_KEYSTORE"
+          test -n "$KEYSTORE_PASSWORD"
+          test -n "$KEY_PASSWORD"
+          test -n "$KEY_ALIAS"
+          echo "$ENCODED_KEYSTORE" | base64 --decode > android/upload-keystore.jks
+          printf '%s\n' \
+            "storePassword=$KEYSTORE_PASSWORD" \
+            "keyPassword=$KEY_PASSWORD" \
+            "keyAlias=$KEY_ALIAS" \
+            "storeFile=upload-keystore.jks" > android/key.properties
+
+      - name: Build Signed APK
+        run: flutter build apk --release --build-name=1.0.${{ github.run_number }} --build-number=${{ github.run_number }}
+
+      - name: Build Signed AAB
         run: flutter build appbundle --release --build-name=1.0.${{ github.run_number }} --build-number=${{ github.run_number }}
 
-      - name: Sign AAB for Play Store
-        uses: r0adkll/sign-android-release@v1.0.4
-        id: sign_app
+      - name: Upload Signed APK
+        uses: actions/upload-artifact@v4
         with:
-          releaseDirectory: build/app/outputs/bundle/release
-          signingKeyBase64: ${{ secrets.ENCODED_KEYSTORE }}
-          alias: ${{ secrets.KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
+          name: Signed-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload Signed AAB
         uses: actions/upload-artifact@v4
         with:
           name: Signed-PlayStore-AAB
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          path: build/app/outputs/bundle/release/app-release.aab

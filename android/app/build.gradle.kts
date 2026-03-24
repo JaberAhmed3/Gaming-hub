@@ -4,8 +4,18 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+import java.util.Properties
+import org.gradle.api.GradleException
+
 val flutterVersionCode = project.findProperty("flutter.versionCode") as String? ?: "1"
 val flutterVersionName = project.findProperty("flutter.versionName") as String? ?: "1.0.0"
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+val hasReleaseKeystore = keystorePropertiesFile.exists()
+
+if (hasReleaseKeystore) {
+    keystorePropertiesFile.inputStream().use { keystoreProperties.load(it) }
+}
 
 android {
     namespace = "com.mdzaberahmed.ffboostpanel"
@@ -13,17 +23,30 @@ android {
 
     defaultConfig {
         applicationId = "com.mdzaberahmed.ffboostpanel"
-        minSdk = flutter.minSdkVersion
+        minSdk = 21
         targetSdk = 35
         versionCode = flutterVersionCode.toInt()
         versionName = flutterVersionName
     }
 
+    signingConfigs {
+        if (hasReleaseKeystore) {
+            create("release") {
+                val storeFilePath = keystoreProperties["storeFile"] as String
+                storeFile = rootProject.file(storeFilePath)
+                storePassword = keystoreProperties["storePassword"] as String
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // Signing is handled by:
-            // 1. build.yml: uses default debug key for CI artifacts
-            // 2. build_and_sign.yml: uses release key via r0adkll/sign-android-release action
+            if (!hasReleaseKeystore) {
+                throw GradleException("Missing android/key.properties for release signing.")
+            }
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
