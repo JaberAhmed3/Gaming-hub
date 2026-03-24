@@ -59,13 +59,13 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.all(30),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black, border: Border.all(color: const Color(0xFFFFD700), width: 2), boxShadow: [BoxShadow(color: const Color(0xFFFFD700).withValues(alpha: 0.6), blurRadius: 50, spreadRadius: 10)]),
+                decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black, border: Border.all(color: const Color(0xFFFFD700), width: 2), boxShadow: [BoxShadow(color: const Color(0xFFFFD700).withOpacity(0.6), blurRadius: 50, spreadRadius: 10)]),
                 child: const Icon(Icons.display_settings_rounded, size: 80, color: Color(0xFFFFD700)),
               ),
               const SizedBox(height: 40),
               const Text("GAME UTILITY HUB", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Color(0xFFFFD700), letterSpacing: 3)),
               const SizedBox(height: 15),
-              Text("PRO ESPORTS EDITION", style: TextStyle(fontSize: 14, color: Colors.cyanAccent.withValues(alpha: 0.8), letterSpacing: 4, fontWeight: FontWeight.bold)),
+              Text("PRO ESPORTS EDITION", style: TextStyle(fontSize: 14, color: Colors.cyanAccent.withOpacity(0.8), letterSpacing: 4, fontWeight: FontWeight.bold)),
               const SizedBox(height: 60),
               const CircularProgressIndicator(color: Color(0xFFFFD700)),
             ],
@@ -242,7 +242,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 500),
             margin: const EdgeInsets.only(right: 15, top: 12, bottom: 12), padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(color: _themeColor, borderRadius: BorderRadius.circular(8), boxShadow: [BoxShadow(color: _themeColor.withValues(alpha: 0.5), blurRadius: 10)]),
+            decoration: BoxDecoration(color: _themeColor, borderRadius: BorderRadius.circular(8), boxShadow: [BoxShadow(color: _themeColor.withOpacity(0.5), blurRadius: 10)]),
             child: Center(child: Text(_isEsportsMode ? "MAX" : "PRO", style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w900, fontSize: 13, letterSpacing: 1))),
           )
         ],
@@ -257,7 +257,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
                 padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
-                decoration: BoxDecoration(color: _themeColor.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(20), border: Border.all(color: _themeColor.withValues(alpha: 0.5))),
+                decoration: BoxDecoration(color: _themeColor.withOpacity(0.1), borderRadius: BorderRadius.circular(20), border: Border.all(color: _themeColor.withOpacity(0.5))),
                 child: Text("[ HUD: $_myDeviceName ]", style: TextStyle(color: _themeColor, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 2)),
               ),
             ),
@@ -266,7 +266,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
             // ESPORTS MODE SWITCH
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(20), border: Border.all(color: _themeColor.withValues(alpha: 0.3))),
+              decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(20), border: Border.all(color: _themeColor.withOpacity(0.3))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -275,10 +275,10 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
                     const SizedBox(width: 10),
                     Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Text("ESPORTS MODE", style: TextStyle(color: _themeColor, fontWeight: FontWeight.bold, fontSize: 15, letterSpacing: 1)),
-                      Text("Maximum Visual Performance", style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 10)),
+                      Text("Maximum Visual Performance", style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 10)),
                     ]),
                   ]),
-                  Switch(value: _isEsportsMode, activeThumbColor: Colors.redAccent, inactiveThumbColor: const Color(0xFFFFD700), onChanged: (val) => setState(() => _isEsportsMode = val)),
+                  Switch(value: _isEsportsMode, activeColor: Colors.redAccent, inactiveThumbColor: const Color(0xFFFFD700), onChanged: (val) => setState(() => _isEsportsMode = val)),
                 ],
               ),
             ),
@@ -291,8 +291,8 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
               decoration: BoxDecoration(
                 gradient: const LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [Color(0xFF1A1F2B), Color(0xFF0A0E11)]),
                 borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: _themeColor.withValues(alpha: 0.5), width: 1.5),
-                boxShadow: [BoxShadow(color: _themeColor.withValues(alpha: 0.15), blurRadius: 25, offset: const Offset(0, 10))]
+                border: Border.all(color: _themeColor.withOpacity(0.5), width: 1.5),
+                boxShadow: [BoxShadow(color: _themeColor.withOpacity(0.15), blurRadius: 25, offset: const Offset(0, 10))]
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -308,10 +308,10 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
                       ),
                       const SizedBox(height: 8),
                       Text("$_ping MS", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: 1)),
-                      Text("LIVE PING", style: TextStyle(fontSize: 11, color: Colors.white.withValues(alpha: 0.7), letterSpacing: 2)),
+                      Text("LIVE PING", style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.7), letterSpacing: 2)),
                     ],
                   ),
-                  Container(height: 60, width: 1, color: _themeColor.withValues(alpha: 0.3)),
+                  Container(height: 60, width: 1, color: _themeColor.withOpacity(0.3)),
                   _buildStatusItem(Icons.battery_charging_full_rounded, "$_batteryLevel%", "BATTERY", _themeColor),
                 ],
               ),
@@ -373,7 +373,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
 
             AnimatedContainer(
               duration: const Duration(seconds: 1),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), boxShadow: _isVipUnlocked ? [BoxShadow(color: _themeColor, blurRadius: 30, spreadRadius: 5)] : [BoxShadow(color: _themeColor.withValues(alpha: 0.4), blurRadius: 20, offset: const Offset(0, 5))]),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), boxShadow: _isVipUnlocked ? [BoxShadow(color: _themeColor, blurRadius: 30, spreadRadius: 5)] : [BoxShadow(color: _themeColor.withOpacity(0.4), blurRadius: 20, offset: const Offset(0, 5))]),
               child: InkWell(
                 onTap: _showRewardedAdAndNavigate, 
                 borderRadius: BorderRadius.circular(25),
@@ -399,7 +399,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
             
             Container(
               height: 120, padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-              decoration: BoxDecoration(color: const Color(0xFF1A1F2B).withValues(alpha: 0.5), borderRadius: BorderRadius.circular(25), border: Border.all(color: Colors.white10, width: 1)),
+              decoration: BoxDecoration(color: const Color(0xFF1A1F2B).withOpacity(0.5), borderRadius: BorderRadius.circular(25), border: Border.all(color: Colors.white10, width: 1)),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal, itemCount: _popularGames.length,
                 itemBuilder: (context, index) {
@@ -413,7 +413,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
                       width: 85, margin: const EdgeInsets.only(right: 20),
                       child: Column(
                         children: [
-                          Container(padding: const EdgeInsets.all(15), decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: game['color'], width: 2), color: game['color'].withValues(alpha: 0.1)), child: Icon(game['icon'], color: game['color'], size: 24)),
+                          Container(padding: const EdgeInsets.all(15), decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: game['color'], width: 2), color: game['color'].withOpacity(0.1)), child: Icon(game['icon'], color: game['color'], size: 24)),
                           const SizedBox(height: 10),
                           Text(game['name'], maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: Colors.white70, fontWeight: FontWeight.bold)),
                         ],
@@ -435,7 +435,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
         Icon(icon, color: color, size: 30, shadows: [Shadow(color: color, blurRadius: 10)]),
         const SizedBox(height: 8),
         Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: 1)),
-        Text(label, style: TextStyle(fontSize: 11, color: Colors.white.withValues(alpha: 0.7), letterSpacing: 2)),
+        Text(label, style: TextStyle(fontSize: 11, color: Colors.white.withOpacity(0.7), letterSpacing: 2)),
       ],
     );
   }
@@ -447,15 +447,15 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
       decoration: BoxDecoration(
         color: const Color(0xFF1A1F2B),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: color.withValues(alpha: 0.6), width: 1.5),
-        boxShadow: [BoxShadow(color: color.withValues(alpha: 0.2), blurRadius: 12, offset: const Offset(0, 4))]
+        border: Border.all(color: color.withOpacity(0.6), width: 1.5),
+        boxShadow: [BoxShadow(color: color.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 4))]
       ),
       child: Column(
         children: [
           Icon(icon, color: color, size: 24, shadows: [Shadow(color: color, blurRadius: 10)]),
           const SizedBox(height: 8),
           Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: color, letterSpacing: 1)),
-          Text(label, style: TextStyle(fontSize: 9, color: Colors.white.withValues(alpha: 0.6), letterSpacing: 1)),
+          Text(label, style: TextStyle(fontSize: 9, color: Colors.white.withOpacity(0.6), letterSpacing: 1)),
         ],
       ),
     );
@@ -466,7 +466,7 @@ class _PremiumBoostPanelState extends State<PremiumBoostPanel> {
       onTap: onTap, borderRadius: BorderRadius.circular(20),
       child: Container(
         height: 100,
-        decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(20), border: Border.all(color: color.withValues(alpha: 0.6), width: 1.5), boxShadow: [BoxShadow(color: color.withValues(alpha: 0.2), blurRadius: 15, offset: const Offset(0, 5))]),
+        decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(20), border: Border.all(color: color.withOpacity(0.6), width: 1.5), boxShadow: [BoxShadow(color: color.withOpacity(0.2), blurRadius: 15, offset: const Offset(0, 5))]),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -507,8 +507,8 @@ class _TouchCalibrationPageState extends State<TouchCalibrationPage> {
             Stack(
               alignment: Alignment.center,
               children: [
-                Container(width: 200, height: 200, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.3), width: 2))),
-                Container(width: 150, height: 150, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.orangeAccent.withValues(alpha: 0.5), width: 2))),
+                Container(width: 200, height: 200, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.orangeAccent.withOpacity(0.3), width: 2))),
+                Container(width: 150, height: 150, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.orangeAccent.withOpacity(0.5), width: 2))),
                 _scanStep == 1 
                   ? const CircularProgressIndicator(color: Colors.orangeAccent, strokeWidth: 8)
                   : Icon(_scanStep == 2 ? Icons.check_circle_rounded : Icons.fingerprint_rounded, size: 80, color: _scanStep == 2 ? Colors.greenAccent : Colors.orangeAccent),
@@ -517,7 +517,7 @@ class _TouchCalibrationPageState extends State<TouchCalibrationPage> {
             const SizedBox(height: 40),
             Text(_scanStep == 0 ? "TAP BUTTON TO SCAN SCREEN" : _scanStep == 1 ? "ANALYZING TOUCH MATRIX..." : "CALIBRATION SUCCESSFUL!", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 2)),
             const SizedBox(height: 10),
-            Text(_scanStep == 2 ? "Touch Latency Reduced by 14ms" : "Ensures maximum response time", style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12)),
+            Text(_scanStep == 2 ? "Touch Latency Reduced by 14ms" : "Ensures maximum response time", style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 12)),
             const SizedBox(height: 60),
             if (_scanStep != 1)
               ElevatedButton(
@@ -565,7 +565,7 @@ class ServerPingPage extends StatelessWidget {
                   children: [
                     Text(s['name'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
                     const SizedBox(height: 5),
-                    Text(index == 0 ? "Optimal Server" : "High Latency", style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12)),
+                    Text(index == 0 ? "Optimal Server" : "High Latency", style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 12)),
                   ],
                 ),
                 Row(
@@ -616,7 +616,7 @@ class _GfxToolPageState extends State<GfxToolPage> {
           borderRadius: BorderRadius.circular(25), 
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300), height: 70, width: double.infinity, 
-            decoration: BoxDecoration(gradient: LinearGradient(colors: showSuccess ? [Colors.green, Colors.greenAccent] : [Colors.cyanAccent, Colors.blueAccent]), borderRadius: BorderRadius.circular(25), boxShadow: [BoxShadow(color: (showSuccess ? Colors.green : Colors.cyanAccent).withValues(alpha: 0.5), blurRadius: 20, offset: const Offset(0, 5))]), 
+            decoration: BoxDecoration(gradient: LinearGradient(colors: showSuccess ? [Colors.green, Colors.greenAccent] : [Colors.cyanAccent, Colors.blueAccent]), borderRadius: BorderRadius.circular(25), boxShadow: [BoxShadow(color: (showSuccess ? Colors.green : Colors.cyanAccent).withOpacity(0.5), blurRadius: 20, offset: const Offset(0, 5))]), 
             child: Center(
               child: isApplying 
                 ? const CircularProgressIndicator(color: Colors.white) 
@@ -633,7 +633,7 @@ class _GfxToolPageState extends State<GfxToolPage> {
   Widget _buildOptionsRow(List<String> options, String currentValue, Function(String) onSelect, Color activeColor) {
     return Row(children: options.map((opt) {
       bool isSelected = currentValue == opt;
-      return Expanded(child: GestureDetector(onTap: () => onSelect(opt), child: AnimatedContainer(duration: const Duration(milliseconds: 300), margin: const EdgeInsets.symmetric(horizontal: 5), padding: const EdgeInsets.symmetric(vertical: 18), decoration: BoxDecoration(color: isSelected ? activeColor.withValues(alpha: 0.1) : const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(15), border: Border.all(color: isSelected ? activeColor : Colors.white10, width: 1.5)), child: Center(child: Text(opt, style: TextStyle(fontWeight: FontWeight.bold, color: isSelected ? activeColor : Colors.white54, fontSize: 13))))));
+      return Expanded(child: GestureDetector(onTap: () => onSelect(opt), child: AnimatedContainer(duration: const Duration(milliseconds: 300), margin: const EdgeInsets.symmetric(horizontal: 5), padding: const EdgeInsets.symmetric(vertical: 18), decoration: BoxDecoration(color: isSelected ? activeColor.withOpacity(0.1) : const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(15), border: Border.all(color: isSelected ? activeColor : Colors.white10, width: 1.5)), child: Center(child: Text(opt, style: TextStyle(fontWeight: FontWeight.bold, color: isSelected ? activeColor : Colors.white54, fontSize: 13))))));
     }).toList());
   }
 }
@@ -661,9 +661,9 @@ class _CrosshairPageState extends State<CrosshairPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("VISUAL PRESET", style: TextStyle(color: Colors.purpleAccent))),
       body: SingleChildScrollView(padding: const EdgeInsets.all(25), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Center(child: Container(width: 150, height: 150, decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(30), border: Border.all(color: selectedColor.withValues(alpha: 0.8), width: 2), boxShadow: [BoxShadow(color: selectedColor.withValues(alpha: 0.4), blurRadius: 30)]), child: Center(child: Icon(selectedIcon, size: 70, color: selectedColor, shadows: [Shadow(color: selectedColor, blurRadius: 20)])))),
+        Center(child: Container(width: 150, height: 150, decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(30), border: Border.all(color: selectedColor.withOpacity(0.8), width: 2), boxShadow: [BoxShadow(color: selectedColor.withOpacity(0.4), blurRadius: 30)]), child: Center(child: Icon(selectedIcon, size: 70, color: selectedColor, shadows: [Shadow(color: selectedColor, blurRadius: 20)])))),
         const SizedBox(height: 40), const Text("LAYOUT STYLE", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white70, letterSpacing: 2)),
-        const SizedBox(height: 20), Wrap(spacing: 20, runSpacing: 20, children: crosshairs.map((icon) => GestureDetector(onTap: () => setState(() => selectedIcon = icon), child: AnimatedContainer(duration: const Duration(milliseconds: 300), width: 60, height: 60, decoration: BoxDecoration(color: selectedIcon == icon ? Colors.purpleAccent.withValues(alpha: 0.1) : const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(15), border: Border.all(color: selectedIcon == icon ? Colors.purpleAccent : Colors.white10, width: 1.5)), child: Icon(icon, color: selectedIcon == icon ? Colors.purpleAccent : Colors.white54)))).toList()),
+        const SizedBox(height: 20), Wrap(spacing: 20, runSpacing: 20, children: crosshairs.map((icon) => GestureDetector(onTap: () => setState(() => selectedIcon = icon), child: AnimatedContainer(duration: const Duration(milliseconds: 300), width: 60, height: 60, decoration: BoxDecoration(color: selectedIcon == icon ? Colors.purpleAccent.withOpacity(0.1) : const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(15), border: Border.all(color: selectedIcon == icon ? Colors.purpleAccent : Colors.white10, width: 1.5)), child: Icon(icon, color: selectedIcon == icon ? Colors.purpleAccent : Colors.white54)))).toList()),
         const SizedBox(height: 40), const Text("PRESET COLOR", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white70, letterSpacing: 2)),
         const SizedBox(height: 20), Wrap(spacing: 20, runSpacing: 20, children: colors.map((color) => GestureDetector(onTap: () => setState(() => selectedColor = color), child: AnimatedContainer(duration: const Duration(milliseconds: 300), width: 50, height: 50, decoration: BoxDecoration(color: color, shape: BoxShape.circle, border: Border.all(color: selectedColor == color ? Colors.white : Colors.transparent, width: 3)), ))).toList()),
         const SizedBox(height: 60),
@@ -673,7 +673,7 @@ class _CrosshairPageState extends State<CrosshairPage> {
           borderRadius: BorderRadius.circular(25), 
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300), height: 70, width: double.infinity, 
-            decoration: BoxDecoration(gradient: LinearGradient(colors: showSuccess ? [Colors.green, Colors.greenAccent] : [Colors.purpleAccent, Colors.deepPurple]), borderRadius: BorderRadius.circular(25), boxShadow: [BoxShadow(color: (showSuccess ? Colors.green : Colors.purpleAccent).withValues(alpha: 0.5), blurRadius: 20, offset: const Offset(0, 5))]), 
+            decoration: BoxDecoration(gradient: LinearGradient(colors: showSuccess ? [Colors.green, Colors.greenAccent] : [Colors.purpleAccent, Colors.deepPurple]), borderRadius: BorderRadius.circular(25), boxShadow: [BoxShadow(color: (showSuccess ? Colors.green : Colors.purpleAccent).withOpacity(0.5), blurRadius: 20, offset: const Offset(0, 5))]), 
             child: Center(
               child: isApplying 
                 ? const CircularProgressIndicator(color: Colors.white) 
@@ -722,7 +722,7 @@ class _VipSensiPageState extends State<VipSensiPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("PRO VISUAL PRESETS", style: TextStyle(color: Color(0xFFFFD700), fontSize: 20))),
       body: SingleChildScrollView(padding: const EdgeInsets.all(25), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(padding: const EdgeInsets.all(20), decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(25), border: Border.all(color: const Color(0xFFFFD700), width: 1.5), boxShadow: [BoxShadow(color: const Color(0xFFFFD700).withValues(alpha: 0.3), blurRadius: 20)]), child: Column(children: [
+        Container(padding: const EdgeInsets.all(20), decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(25), border: Border.all(color: const Color(0xFFFFD700), width: 1.5), boxShadow: [BoxShadow(color: const Color(0xFFFFD700).withOpacity(0.3), blurRadius: 20)]), child: Column(children: [
           const Text("🔥 PRO UTILITIES 🔥", style: TextStyle(color: Color(0xFFFFD700), fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1)), const Divider(color: Color(0xFFFFD700), height: 30),
           _buildVipToggle("Custom Graphics Layout", "Display Profile for $myDeviceName", Icons.aspect_ratio_rounded, isDPIBoosted, (val) => setState(() => isDPIBoosted = val)),
           _buildVipToggle("Network Visual Preset", "Connection Status Indicator", Icons.network_check_rounded, isPingFixed, (val) => setState(() => isPingFixed = val)),
@@ -740,7 +740,7 @@ class _VipSensiPageState extends State<VipSensiPage> {
           borderRadius: BorderRadius.circular(25), 
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300), height: 70, width: double.infinity, 
-            decoration: BoxDecoration(gradient: LinearGradient(colors: showSuccess ? [Colors.green, Colors.greenAccent] : [const Color(0xFFFFD700), const Color(0xFFFF8C00)]), borderRadius: BorderRadius.circular(25), boxShadow: [BoxShadow(color: (showSuccess ? Colors.green : const Color(0xFFFFD700)).withValues(alpha: 0.5), blurRadius: 20, offset: const Offset(0, 5))]), 
+            decoration: BoxDecoration(gradient: LinearGradient(colors: showSuccess ? [Colors.green, Colors.greenAccent] : [const Color(0xFFFFD700), const Color(0xFFFF8C00)]), borderRadius: BorderRadius.circular(25), boxShadow: [BoxShadow(color: (showSuccess ? Colors.green : const Color(0xFFFFD700)).withOpacity(0.5), blurRadius: 20, offset: const Offset(0, 5))]), 
             child: Center(
               child: isApplying 
                 ? const CircularProgressIndicator(color: Colors.black87) 
@@ -754,7 +754,7 @@ class _VipSensiPageState extends State<VipSensiPage> {
     );
   }
   Widget _buildVipToggle(String title, String subtitle, IconData icon, bool value, Function(bool) onChanged) {
-    return Padding(padding: const EdgeInsets.symmetric(vertical: 10), child: ListTile(contentPadding: EdgeInsets.zero, leading: Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: const Color(0xFFFFD700).withValues(alpha: 0.1), shape: BoxShape.circle), child: Icon(icon, color: const Color(0xFFFFD700))), title: Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)), subtitle: Text(subtitle, style: const TextStyle(color: Colors.white70, fontSize: 11)), trailing: Transform.scale(scale: 1.1, child: Switch(value: value, onChanged: onChanged, activeThumbColor: const Color(0xFFFFD700), activeTrackColor: const Color(0xFFFFD700).withValues(alpha: 0.4)))));
+    return Padding(padding: const EdgeInsets.symmetric(vertical: 10), child: ListTile(contentPadding: EdgeInsets.zero, leading: Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: const Color(0xFFFFD700).withOpacity(0.1), shape: BoxShape.circle), child: Icon(icon, color: const Color(0xFFFFD700))), title: Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)), subtitle: Text(subtitle, style: const TextStyle(color: Colors.white70, fontSize: 11)), trailing: Transform.scale(scale: 1.1, child: Switch(value: value, onChanged: onChanged, activeColor: const Color(0xFFFFD700), activeTrackColor: const Color(0xFFFFD700).withOpacity(0.4)))));
   }
   Widget _buildSensiSlider(String title, double value, Function(double) onChanged) {
     return Column(children: [Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(title, style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 12)), Text("${value.toInt()}", style: const TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontSize: 16))]), Slider(value: value, min: 0, max: 100, onChanged: onChanged)]);
@@ -817,7 +817,7 @@ class _CPUMemoryPageState extends State<CPUMemoryPage> {
                   const SizedBox(height: 15),
                   Container(
                     height: 100,
-                    decoration: BoxDecoration(color: Colors.blueAccent.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(color: Colors.blueAccent.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
                     child: CustomPaint(
                       painter: GraphPainter(values: cpuHistory, color: Colors.blueAccent),
                       child: Container(),
@@ -855,7 +855,7 @@ class _CPUMemoryPageState extends State<CPUMemoryPage> {
                   const SizedBox(height: 15),
                   Container(
                     height: 100,
-                    decoration: BoxDecoration(color: Colors.purpleAccent.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(color: Colors.purpleAccent.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
                     child: CustomPaint(
                       painter: GraphPainter(values: ramHistory, color: Colors.purpleAccent),
                       child: Container(),
@@ -889,7 +889,7 @@ class _CPUMemoryPageState extends State<CPUMemoryPage> {
   Widget _buildStatItem(String label, String value, Color color) {
     return Column(
       children: [
-        Text(label, style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 10)),
+        Text(label, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10)),
         const SizedBox(height: 5),
         Text(value, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: color)),
       ],
@@ -900,7 +900,7 @@ class _CPUMemoryPageState extends State<CPUMemoryPage> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-      decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(15), border: Border.all(color: statusColor.withValues(alpha: 0.5))),
+      decoration: BoxDecoration(color: const Color(0xFF1A1F2B), borderRadius: BorderRadius.circular(15), border: Border.all(color: statusColor.withOpacity(0.5))),
       child: Row(
         children: [
           Icon(Icons.lightbulb_rounded, color: statusColor, size: 20),
@@ -1008,7 +1008,7 @@ class _SpeedTestPageState extends State<SpeedTestPage> {
                       value: testProgress / 100,
                       strokeWidth: 8,
                       color: Colors.cyanAccent,
-                      backgroundColor: Colors.cyanAccent.withValues(alpha: 0.2),
+                      backgroundColor: Colors.cyanAccent.withOpacity(0.2),
                     ),
                   ),
                   Column(
@@ -1102,7 +1102,7 @@ class _ProfilesPageState extends State<ProfilesPage> {
           decoration: InputDecoration(
             hintText: "Profile name",
             hintStyle: const TextStyle(color: Colors.white54),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.yellow.withValues(alpha: 0.5))),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.yellow.withOpacity(0.5))),
             focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.yellow)),
           ),
         ),
@@ -1139,7 +1139,7 @@ class _ProfilesPageState extends State<ProfilesPage> {
           ),
           Expanded(
             child: widget.profiles.isEmpty
-              ? Center(child: Text("No profiles saved", style: TextStyle(color: Colors.white.withValues(alpha: 0.5))))
+              ? Center(child: Text("No profiles saved", style: TextStyle(color: Colors.white.withOpacity(0.5))))
               : ListView.builder(
                   padding: const EdgeInsets.all(20),
                   itemCount: widget.profiles.length,
@@ -1151,14 +1151,14 @@ class _ProfilesPageState extends State<ProfilesPage> {
                       decoration: BoxDecoration(
                         color: const Color(0xFF1A1F2B),
                         borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.yellow.withValues(alpha: 0.5)),
+                        border: Border.all(color: Colors.yellow.withOpacity(0.5)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:[ 
                           Text(profile['name'], style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.yellow)),
                           const SizedBox(height: 8),
-                          Text(profile['timestamp'], style: TextStyle(fontSize: 10, color: Colors.white.withValues(alpha: 0.5))),
+                          Text(profile['timestamp'], style: TextStyle(fontSize: 10, color: Colors.white.withOpacity(0.5))),
                           const SizedBox(height: 12),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -1183,7 +1183,7 @@ class _ProfilesPageState extends State<ProfilesPage> {
   Widget _buildProfileStat(String label, String value) {
     return Column(
       children: [
-        Text(label, style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 9)),
+        Text(label, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 9)),
         const SizedBox(height: 5),
         Text(value, style: const TextStyle(color: Colors.yellow, fontWeight: FontWeight.bold, fontSize: 12)),
       ],
